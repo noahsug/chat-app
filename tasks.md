@@ -19,28 +19,6 @@ After each task is complete:
   - Verify project structure is created correctly
   - ⚠️ Must be done by human as shell command is interactive
 
-- [ ] **Create Configuration Files**
-  - Create `.gitignore` with content from instructions.md
-  - Create `.prettierrc` with content from instructions.md
-  - Create `.env.example` with content from instructions.md
-  - Copy `.env.example` to `.env.local` and update values for local development
-
-- [ ] **Setup ESLint Configuration**
-  - Create `eslint.config.js` with flat config format for ESLint 9
-  - Configure TypeScript-specific rules and Next.js compatibility
-  - Add Prettier integration to prevent conflicts
-
-- [ ] **Install Development Dependencies**
-  - Install all dev dependencies listed in instructions.md using `npm install --save-dev`
-  - Update `package.json` scripts section with all scripts from instructions.md
-  - Run `npm run lint` to verify ESLint setup
-
-- [ ] **Configure Git Hooks**
-  - Run `npx husky install` to initialize Husky
-  - Create `.husky/pre-commit` hook that runs `npx lint-staged`
-  - Create `commitlint.config.js` for conventional commit enforcement
-  - Test git hooks by making a test commit
-
 ### 1.2 Database Setup
 
 - [ ] **Design Prisma Schema**
