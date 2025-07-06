@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:talent500.com)",
+      "Bash(gh repo create:*)"
+    ],
+    "deny": []
+  }
+}
