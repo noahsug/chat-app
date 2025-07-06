@@ -7,10 +7,15 @@ Create a brand new global messaging app using the T3 stack (Next.js, TypeScript,
 ### T3 Stack Setup
 
 - Use `create-t3-app@latest` to scaffold the project.
-- Include TypeScript, Tailwind CSS, tRPC, and Prisma.
-- Skip NextAuth.js (no authentication needed for this simple app).
-- Use SQLite database for local development (configured in Prisma schema).
-- Use the App Router.
+- Select the following options when prompted:
+  - **Language**: TypeScript
+  - **Styling**: Tailwind CSS (Yes)
+  - **API**: tRPC (Yes)
+  - **Authentication**: No
+  - **ORM**: Prisma (Yes)
+  - **Routing**: Next.js App Router (Yes)
+  - **Database**: SQLite
+  - **Linting/Formatting**: ESLint/Prettier
 
 ### Database Schema
 
@@ -101,15 +106,7 @@ Create a brand new global messaging app using the T3 stack (Next.js, TypeScript,
 
 ## Git Workflow
 
-Commit after each major milestone:
-
-1. Initial T3 app setup and configuration files
-2. Database schema and Prisma setup
-3. Basic UI components
-4. tRPC API routes
-5. Real-time messaging functionality
-6. Username system
-7. Final styling and polish
+- Commit after each sub task
 
 ## Deployment
 
