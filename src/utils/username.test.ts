@@ -97,7 +97,8 @@ describe("Username utility functions", () => {
     });
 
     it("should return existing data from localStorage", () => {
-      const mockGetItem = vi.mocked(localStorage.getItem);
+      const mockGetItem = vi.fn();
+      vi.mocked(localStorage).getItem = mockGetItem;
       mockGetItem.mockImplementation((key) => {
         if (key === "chat-username") return "TestUser123";
         if (key === "chat-color") return "#FF6B6B";
@@ -111,8 +112,10 @@ describe("Username utility functions", () => {
     });
 
     it("should generate and store new data if none exists", () => {
-      const mockGetItem = vi.mocked(localStorage.getItem);
-      const mockSetItem = vi.mocked(localStorage.setItem);
+      const mockGetItem = vi.fn();
+      const mockSetItem = vi.fn();
+      vi.mocked(localStorage).getItem = mockGetItem;
+      vi.mocked(localStorage).setItem = mockSetItem;
       mockGetItem.mockReturnValue(null);
 
       const userData = getUserData();
@@ -124,7 +127,8 @@ describe("Username utility functions", () => {
     });
 
     it("should save data to localStorage", () => {
-      const mockSetItem = vi.mocked(localStorage.setItem);
+      const mockSetItem = vi.fn();
+      vi.mocked(localStorage).setItem = mockSetItem;
       
       setUserData("NewUser456", "#4ECDC4");
       
