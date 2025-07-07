@@ -148,27 +148,7 @@ npm run test:e2e    # E2E tests
 
 ## Deployment
 
-### Vercel (Recommended)
-
-1. Push your code to GitHub
-2. Import the project in [Vercel](https://vercel.com)
-3. Set up environment variables:
-   - `DATABASE_URL` - PostgreSQL connection string
-4. Deploy automatically
-
-The app is optimized for Vercel with:
-
-- Automatic PostgreSQL database provisioning
-- Zero-config deployment
-- Environment variable management
-
-### Environment Variables
-
-For production, set:
-
-```env
-DATABASE_URL="your-postgresql-connection-string"
-```
+Push to GitHub. Vercel deploys automatically.
 
 ## Contributing
 
