@@ -9,7 +9,8 @@
       "Bash(npm run lint)",
       "mcp__context7__resolve-library-id",
       "mcp__context7__get-library-docs",
-      "Bash(vercel env:*)"
+      "Bash(vercel env:*)",
+      "Bash(rg:*)"
     ],
     "deny": []
   }

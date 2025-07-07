@@ -215,13 +215,6 @@ Push to GitHub. Vercel deploys automatically.
 6. Push to branch: `git push origin feature-name`
 7. Open a Pull Request
 
-## Future Improvements
-
-- **Real-time Subscriptions**: Replace polling with tRPC subscriptions for instant message delivery and reduced server load
-- **UI theme**: Be less inspired by twitch UI and do something more original
-- **Security**: Protect against XSS, etc
-- **Rate limiting**: User can only post 10 messages in 30s
-
 ## License
 
 This project is open source and available under the [MIT License](LICENSE).
