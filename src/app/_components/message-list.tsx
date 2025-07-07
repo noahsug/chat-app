@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import { useEffect, useRef } from "react";
 import { Post } from "./post";
 import { api } from "@/trpc/react";
 
@@ -16,12 +16,42 @@ interface Message {
  * Main message list component that displays all chat messages
  * Uses polling (every 2 seconds) for real-time updates instead of WebSockets
  * for simplicity and to work well with Vercel's serverless functions
+ * 
+ * Features smart auto-scroll: only scrolls to new messages when user is already
+ * at the bottom of the chat, preserving reading position when scrolled up
  */
 export function MessageList() {
   const query = api.message.getAll.useQuery(undefined, {
     refetchInterval: 2000, // Poll every 2 seconds for real-time feel
   });
   const { data: messages, isLoading, error } = query;
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const prevMessageCountRef = useRef<number>(0);
+
+  const isAtBottom = () => {
+    if (!containerRef.current) return false;
+    const { scrollTop, scrollHeight, clientHeight } = containerRef.current;
+    // Consider "at bottom" if within 100px of the bottom
+    return scrollHeight - scrollTop - clientHeight < 100;
+  };
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  // Smart auto-scroll: only scroll when user is at bottom AND there's a new message
+  useEffect(() => {
+    const currentMessageCount = messages?.length ?? 0;
+    const wasAtBottom = isAtBottom();
+    const hasNewMessage = currentMessageCount > prevMessageCountRef.current;
+
+    if (hasNewMessage && wasAtBottom) {
+      scrollToBottom();
+    }
+
+    prevMessageCountRef.current = currentMessageCount;
+  }, [messages]);
 
   if (isLoading) {
     return (
@@ -46,7 +76,7 @@ export function MessageList() {
   }
 
   return (
-    <div className="flex-1 overflow-y-auto">
+    <div className="flex-1 overflow-y-auto" ref={containerRef}>
       <div className="mx-auto max-w-4xl">
         {messages?.length === 0 ? (
           <div className="p-4 text-sm text-gray-400">
@@ -64,6 +94,7 @@ export function MessageList() {
             />
           ))
         )}
+        <div ref={messagesEndRef} />
       </div>
     </div>
   );
