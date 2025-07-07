@@ -6,6 +6,7 @@ This directory contains all React components for the chat application.
 
 ```
 App (page.tsx)
+├── UserProvider (context)
 ├── Header
 │   └── UsernameEditor
 ├── MessageList
@@ -26,10 +27,17 @@ App (page.tsx)
 
 ## Data Flow
 
-1. **User Management**: Each component calls `getUserData()` independently (TODO: move to shared context)
+1. **User Management**: Shared `UserProvider` context manages username/color globally
 2. **Message Flow**: ChatInput → API → MessageList (via polling/invalidation)
 3. **Real-time**: Uses 2-second polling instead of WebSockets for simplicity
 
 ## State Management
 
-Currently uses local component state + localStorage. Consider moving to React Context for shared user state.
+- **User State**: React Context (`UserProvider`) with localStorage persistence
+- **Message State**: tRPC queries with 2-second polling
+- **Form State**: Local component state for inputs
+
+### User Context Usage
+```typescript
+const { userData, updateUsername, isLoading } = useUser();
+```

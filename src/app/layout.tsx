@@ -4,6 +4,7 @@ import { type Metadata } from "next";
 import { Geist } from "next/font/google";
 
 import { TRPCReactProvider } from "@/trpc/react";
+import { UserProvider } from "@/contexts/user-context";
 
 export const metadata: Metadata = {
   title: "Global Chat",
@@ -22,7 +23,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${geistFont.variable}`}>
       <body className="min-h-screen bg-[#18181B] text-[#EFEFF1]">
-        <TRPCReactProvider>{children}</TRPCReactProvider>
+        <TRPCReactProvider>
+          <UserProvider>
+            {children}
+          </UserProvider>
+        </TRPCReactProvider>
       </body>
     </html>
   );

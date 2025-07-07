@@ -1,23 +1,24 @@
 "use client";
 
 import { useState } from "react";
-import { validateUsername, setUserData } from "@/utils/username";
+import { validateUsername } from "@/utils/username";
+import { useUser } from "@/contexts/user-context";
 
 interface UsernameEditorProps {
   username: string;
   color: string;
-  onUsernameChange: (newUsername: string) => void;
 }
 
 /**
  * Click-to-edit username component
  * Displays username as a button, converts to input on click
- * Validates input and saves to localStorage on save
+ * Validates input and saves to shared context/localStorage on save
  */
-export function UsernameEditor({ username, color, onUsernameChange }: UsernameEditorProps) {
+export function UsernameEditor({ username, color }: UsernameEditorProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [editValue, setEditValue] = useState(username);
   const [error, setError] = useState("");
+  const { updateUsername } = useUser();
 
   const handleEdit = () => {
     setIsEditing(true);
@@ -33,8 +34,7 @@ export function UsernameEditor({ username, color, onUsernameChange }: UsernameEd
       return;
     }
 
-    setUserData(trimmedValue, color);
-    onUsernameChange(trimmedValue);
+    updateUsername(trimmedValue);
     setIsEditing(false);
     setError("");
   };

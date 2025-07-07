@@ -1,23 +1,17 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { api } from "@/trpc/react";
-import { getUserData } from "@/utils/username";
+import { useUser } from "@/contexts/user-context";
 
 /**
  * Chat input component with message validation and sending
- * Manages user data locally (TODO: move to shared context for better state management)
+ * Uses shared user context for consistent state management
  */
 export function ChatInput() {
   const [message, setMessage] = useState("");
-  const [userData, setUserData] = useState({ username: "", color: "" });
+  const { userData, isLoading } = useUser();
   const utils = api.useUtils();
-
-  // Load user data from localStorage on component mount
-  useEffect(() => {
-    const data = getUserData();
-    setUserData(data);
-  }, []);
 
   const createMessage = api.message.create.useMutation({
     onSuccess: async () => {
@@ -69,7 +63,7 @@ export function ChatInput() {
           <button
             type="submit"
             className="bg-[#9146FF] hover:bg-[#8441E6] text-white px-6 py-2 rounded-lg font-medium transition-colors disabled:opacity-50 sm:self-start"
-            disabled={!message.trim() || !userData.username || createMessage.isPending}
+            disabled={!message.trim() || !userData.username || createMessage.isPending || isLoading}
           >
             {createMessage.isPending ? "Sending..." : "Send"}
           </button>
