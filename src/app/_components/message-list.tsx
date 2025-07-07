@@ -4,18 +4,30 @@ import { useEffect, useRef } from "react";
 import { Post } from "./post";
 import { api } from "@/trpc/react";
 
+interface Message {
+  id: number;
+  username: string;
+  content: string;
+  createdAt: Date;
+  color: string;
+}
+
 /**
  * Main message list component that displays all chat messages
  * Uses polling (every 2 seconds) for real-time updates instead of WebSockets
  * for simplicity and to work well with Vercel's serverless functions
  */
 export function MessageList() {
-  const { data: messages, isLoading, error } = api.message.getAll.useQuery(
+  const query = api.message.getAll.useQuery(
     undefined,
     {
       refetchInterval: 2000, // Poll every 2 seconds for real-time feel
     }
   );
+  
+  const messages: Message[] | undefined = query.data;
+  const isLoading: boolean = query.isLoading;
+  const error = query.error;
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -41,7 +53,9 @@ export function MessageList() {
     return (
       <div className="flex-1 overflow-y-auto">
         <div className="max-w-4xl mx-auto p-4">
-          <div className="text-red-400 text-sm">Error loading messages: {error.message}</div>
+          <div className="text-red-400 text-sm">
+            Error loading messages: {error.message || "Unknown error"}
+          </div>
         </div>
       </div>
     );
@@ -50,12 +64,12 @@ export function MessageList() {
   return (
     <div className="flex-1 overflow-y-auto">
       <div className="max-w-4xl mx-auto">
-        {messages?.length === 0 ? (
+        {!messages || messages.length === 0 ? (
           <div className="p-4 text-gray-400 text-sm">
             No messages yet. Be the first to say hello!
           </div>
         ) : (
-          messages?.map((message, index) => (
+          messages.map((message: Message, index: number) => (
             <Post
               key={message.id}
               username={message.username}
