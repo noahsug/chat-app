@@ -2,17 +2,23 @@
 
 This document outlines the tasks for building the global messaging app.
 
+## Workflow (**Important**)
+
+- Read `instructions.md` before completing any tasks
+- Check off subtasks as they're finished.
+- When a task is done, check it off and create a git commit.
+
 ## Phase 1: Project Setup & Basic UI
 
-- [x] **Task 1: Initial T3 App Setup**
+- [x] **Task 1: Initial T3 App Setup (Human only)**
   - Run `npm create t3-app@latest` with the specified options (TypeScript, Tailwind CSS, tRPC, Prisma, Next.js App Router, SQLite, ESLint/Prettier).
-- [ ] **Task 2: Basic UI Layout**
-  - [ ] Create the main application layout in `src/app/layout.tsx`.
-  - [ ] Implement a dark theme background for the entire app.
-  - [ ] Create a header component that includes the application title.
-  - [ ] Create a message display area component.
-  - [ ] Create a message input area component with a text input and a "Send" button.
-  - [ ] Style the layout to be full-screen with the input area at the bottom.
+- [x] **Task 2: Basic UI Layout**
+  - [x] Create the main application layout in `src/app/layout.tsx`.
+  - [x] Implement a dark theme background for the entire app.
+  - [x] Create a header component that includes the application title.
+  - [x] Create a message display area component.
+  - [x] Create a message input area component with a text input and a "Send" button.
+  - [x] Style the layout to be full-screen with the input area at the bottom.
 - [ ] **Task 3: Static Message Display**
   - [ ] Create a `post.tsx` component to display a single message.
   - [ ] The component should accept props for `username`, `content`, `timestamp`, and `color`.

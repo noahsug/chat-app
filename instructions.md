@@ -104,10 +104,6 @@ Create a brand new global messaging app using the T3 stack (Next.js, TypeScript,
 1. Run `npm create t3-app@latest` with required options.
 2. Configure Vitest, Playwright, Husky, and commitlint.
 
-## Git Workflow
-
-- Commit after each sub task
-
 ## Deployment
 
 - Deploy to Vercel (not GitHub Pages, since this is a full-stack app)
