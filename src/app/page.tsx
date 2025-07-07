@@ -3,6 +3,10 @@ import { MessageList } from "@/app/_components/message-list";
 import { ChatInput } from "@/app/_components/chat-input";
 import { HydrateClient } from "@/trpc/server";
 
+/**
+ * Main chat application page
+ * Layout: Header (top) -> MessageList (middle, scrollable) -> ChatInput (bottom, fixed)
+ */
 export default async function Home() {
   return (
     <HydrateClient>

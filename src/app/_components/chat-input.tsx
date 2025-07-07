@@ -4,11 +4,16 @@ import { useState, useEffect } from "react";
 import { api } from "@/trpc/react";
 import { getUserData } from "@/utils/username";
 
+/**
+ * Chat input component with message validation and sending
+ * Manages user data locally (TODO: move to shared context for better state management)
+ */
 export function ChatInput() {
   const [message, setMessage] = useState("");
   const [userData, setUserData] = useState({ username: "", color: "" });
   const utils = api.useUtils();
 
+  // Load user data from localStorage on component mount
   useEffect(() => {
     const data = getUserData();
     setUserData(data);
@@ -16,6 +21,8 @@ export function ChatInput() {
 
   const createMessage = api.message.create.useMutation({
     onSuccess: async () => {
+      // Invalidate the message list to trigger refetch and show new message immediately
+      // This works with polling to ensure instant UI update
       await utils.message.getAll.invalidate();
       setMessage("");
     },

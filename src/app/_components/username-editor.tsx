@@ -9,6 +9,11 @@ interface UsernameEditorProps {
   onUsernameChange: (newUsername: string) => void;
 }
 
+/**
+ * Click-to-edit username component
+ * Displays username as a button, converts to input on click
+ * Validates input and saves to localStorage on save
+ */
 export function UsernameEditor({ username, color, onUsernameChange }: UsernameEditorProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [editValue, setEditValue] = useState(username);
@@ -24,7 +29,7 @@ export function UsernameEditor({ username, color, onUsernameChange }: UsernameEd
     const trimmedValue = editValue.trim();
     
     if (!validateUsername(trimmedValue)) {
-      setError("Username must be 3-50 characters, alphanumeric only");
+      setError("Username must be 3-50 characters, alphanumeric and spaces only");
       return;
     }
 

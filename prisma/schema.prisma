@@ -10,12 +10,14 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
+// Chat message model - stores individual messages with user info
+// Note: No user table - usernames/colors are stored per message for simplicity
 model Message {
     id        Int      @id @default(autoincrement())
-    content   String
-    username  String
-    color     String
+    content   String   // Message text (max 500 chars enforced by API)
+    username  String   // User's display name (max 50 chars)
+    color     String   // Hex color for username display
     createdAt DateTime @default(now())
 
-    @@index([createdAt])
+    @@index([createdAt]) // Index for chronological ordering
 }

@@ -1,9 +1,13 @@
+/**
+ * Individual chat message component with Twitch-style formatting
+ * Displays: [HH:MM] username: message content
+ */
 interface PostProps {
   username: string;
   content: string;
   timestamp: Date;
-  color: string;
-  isAlternate?: boolean;
+  color: string; // Hex color for username display
+  isAlternate?: boolean; // For alternating row backgrounds
 }
 
 export function Post({ username, content, timestamp, color, isAlternate = false }: PostProps) {

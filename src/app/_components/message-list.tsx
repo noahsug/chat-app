@@ -4,11 +4,16 @@ import { useEffect, useRef } from "react";
 import { Post } from "./post";
 import { api } from "@/trpc/react";
 
+/**
+ * Main message list component that displays all chat messages
+ * Uses polling (every 2 seconds) for real-time updates instead of WebSockets
+ * for simplicity and to work well with Vercel's serverless functions
+ */
 export function MessageList() {
   const { data: messages, isLoading, error } = api.message.getAll.useQuery(
     undefined,
     {
-      refetchInterval: 2000, // Poll every 2 seconds
+      refetchInterval: 2000, // Poll every 2 seconds for real-time feel
     }
   );
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -17,6 +22,7 @@ export function MessageList() {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
+  // Auto-scroll to bottom when new messages arrive
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
@@ -56,7 +62,7 @@ export function MessageList() {
               content={message.content}
               timestamp={message.createdAt}
               color={message.color}
-              isAlternate={index % 2 === 1}
+              isAlternate={index % 2 === 1} // Alternate row backgrounds for readability
             />
           ))
         )}
