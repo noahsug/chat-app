@@ -17,8 +17,8 @@ interface Message {
  * Uses polling (every 2 seconds) for real-time updates instead of WebSockets
  * for simplicity and to work well with Vercel's serverless functions
  * 
- * Features smart auto-scroll: only scrolls to new messages when user is already
- * at the bottom of the chat, preserving reading position when scrolled up
+ * Features smart auto-scroll: scrolls to bottom on initial page load, then only 
+ * scrolls to new messages when user is at bottom, preserving reading position when scrolled up
  */
 export function MessageList() {
   const query = api.message.getAll.useQuery(undefined, {
@@ -28,6 +28,7 @@ export function MessageList() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const prevMessageCountRef = useRef<number>(0);
+  const hasInitiallyScrolledRef = useRef<boolean>(false);
 
   const isAtBottom = () => {
     if (!containerRef.current) return false;
@@ -40,14 +41,17 @@ export function MessageList() {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
-  // Smart auto-scroll: only scroll when user is at bottom AND there's a new message
+  // Smart auto-scroll: scroll on initial load, then only when user is at bottom AND there's a new message
   useEffect(() => {
     const currentMessageCount = messages?.length ?? 0;
     const wasAtBottom = isAtBottom();
     const hasNewMessage = currentMessageCount > prevMessageCountRef.current;
+    const isInitialLoad = !hasInitiallyScrolledRef.current && currentMessageCount > 0;
 
-    if (hasNewMessage && wasAtBottom) {
+    // Scroll on initial page load or when user is at bottom and new message arrives
+    if (isInitialLoad || (hasNewMessage && wasAtBottom)) {
       scrollToBottom();
+      hasInitiallyScrolledRef.current = true;
     }
 
     prevMessageCountRef.current = currentMessageCount;
