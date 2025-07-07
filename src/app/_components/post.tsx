@@ -1,50 +1,27 @@
-"use client";
+interface PostProps {
+  username: string;
+  content: string;
+  timestamp: Date;
+  color: string;
+}
 
-import { useState } from "react";
-
-import { api } from "@/trpc/react";
-
-export function LatestPost() {
-  const [latestPost] = api.post.getLatest.useSuspenseQuery();
-
-  const utils = api.useUtils();
-  const [name, setName] = useState("");
-  const createPost = api.post.create.useMutation({
-    onSuccess: async () => {
-      await utils.post.invalidate();
-      setName("");
-    },
-  });
+export function Post({ username, content, timestamp, color }: PostProps) {
+  const formatTime = (date: Date) => {
+    return date.toLocaleTimeString("en-US", {
+      hour12: false,
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  };
 
   return (
-    <div className="w-full max-w-xs">
-      {latestPost ? (
-        <p className="truncate">Your most recent post: {latestPost.name}</p>
-      ) : (
-        <p>You have no posts yet.</p>
-      )}
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          createPost.mutate({ name });
-        }}
-        className="flex flex-col gap-2"
-      >
-        <input
-          type="text"
-          placeholder="Title"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          className="w-full rounded-full bg-white/10 px-4 py-2 text-white"
-        />
-        <button
-          type="submit"
-          className="rounded-full bg-white/10 px-10 py-3 font-semibold transition hover:bg-white/20"
-          disabled={createPost.isPending}
-        >
-          {createPost.isPending ? "Submitting..." : "Submit"}
-        </button>
-      </form>
+    <div className="px-4 py-1 text-sm leading-relaxed">
+      <span className="text-gray-400">[{formatTime(timestamp)}]</span>{" "}
+      <span style={{ color }} className="font-medium">
+        {username}
+      </span>
+      <span className="text-gray-400">: </span>
+      <span className="text-gray-200">{content}</span>
     </div>
   );
 }
