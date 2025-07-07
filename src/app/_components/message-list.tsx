@@ -5,7 +5,12 @@ import { Post } from "./post";
 import { api } from "@/trpc/react";
 
 export function MessageList() {
-  const { data: messages, isLoading, error } = api.message.getAll.useQuery();
+  const { data: messages, isLoading, error } = api.message.getAll.useQuery(
+    undefined,
+    {
+      refetchInterval: 2000, // Poll every 2 seconds
+    }
+  );
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
