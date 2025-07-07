@@ -87,6 +87,39 @@ A real-time messaging application built with the T3 Stack, featuring Twitch-styl
 
 7. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
+### Running Against Production Database
+
+To run your local app against the production database (useful for testing with real data):
+
+1. Pull production environment variables:
+
+   ```bash
+   vercel env pull .env.local --environment=production
+   ```
+
+2. Update your `.env` file to use the production database:
+
+   ```bash
+   # Replace your local DATABASE_URL with the production one from .env.local
+   DATABASE_URL="prisma+postgres://accelerate.prisma-data.net/?api_key=..."
+   ```
+
+3. Generate Prisma client for Accelerate:
+
+   ```bash
+   npx prisma generate --accelerate
+   ```
+
+4. Start the development server:
+
+   ```bash
+   npm run dev
+   ```
+
+**⚠️ Warning:** This connects to your live production database. Be careful with data modifications.
+
+To switch back to local development, restore your local DATABASE_URL and run `npx prisma generate`.
+
 ## Available Scripts
 
 - `npm run dev` - Start development server with Turbopack
@@ -181,6 +214,13 @@ Push to GitHub. Vercel deploys automatically.
 5. Commit changes: `git commit -m "Description"`
 6. Push to branch: `git push origin feature-name`
 7. Open a Pull Request
+
+## Future Improvements
+
+- **Real-time Subscriptions**: Replace polling with tRPC subscriptions for instant message delivery and reduced server load
+- **UI theme**: Be less inspired by twitch UI and do something more original
+- **Security**: Protect against XSS, etc
+- **Rate limiting**: User can only post 10 messages in 30s
 
 ## License
 
