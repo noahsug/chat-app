@@ -1,16 +1,31 @@
 "use client";
 
 import { useState } from "react";
+import { api } from "@/trpc/react";
 
 export function ChatInput() {
   const [message, setMessage] = useState("");
+  const utils = api.useUtils();
+
+  const createMessage = api.message.create.useMutation({
+    onSuccess: async () => {
+      await utils.message.getAll.invalidate();
+      setMessage("");
+    },
+    onError: (error) => {
+      console.error("Error sending message:", error);
+    },
+  });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (message.trim()) {
-      // TODO: Send message logic will be implemented in later tasks
-      console.log("Sending message:", message);
-      setMessage("");
+      // Temporary values - will be replaced with user system in task 8
+      createMessage.mutate({
+        content: message.trim(),
+        username: "Guest123",
+        color: "#FF6B6B",
+      });
     }
   };
 
@@ -29,9 +44,9 @@ export function ChatInput() {
           <button
             type="submit"
             className="bg-[#9146FF] hover:bg-[#8441E6] text-white px-6 py-2 rounded-lg font-medium transition-colors disabled:opacity-50"
-            disabled={!message.trim()}
+            disabled={!message.trim() || createMessage.isPending}
           >
-            Send
+            {createMessage.isPending ? "Sending..." : "Send"}
           </button>
         </form>
       </div>
