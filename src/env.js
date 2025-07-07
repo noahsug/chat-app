@@ -1,6 +1,12 @@
 import { createEnv } from "@t3-oss/env-nextjs";
 import { z } from "zod";
 
+console.log("Environment validation - available vars:", {
+  DATABASE_URL: process.env.DATABASE_URL ? "✓ present" : "✗ missing",
+  NODE_ENV: process.env.NODE_ENV ? "✓ present" : "✗ missing",
+  allKeys: Object.keys(process.env).filter(k => k.includes("DATABASE")).join(", ")
+});
+
 export const env = createEnv({
   /**
    * Specify your server-side environment variables schema here. This way you can ensure the app
