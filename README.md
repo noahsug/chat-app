@@ -2,7 +2,7 @@
 
 A real-time messaging application built with the T3 Stack, featuring Twitch-style chat UI and instant message updates.
 
-![Global Chat Demo](https://via.placeholder.com/800x400/18181B/EFEFF1?text=Global+Chat+App)
+![Global Chat Demo](https://dummyimage.com/800x400/18181B/EFEFF1?text=Global+Chat+App)
 
 ## Features
 
@@ -39,22 +39,26 @@ A real-time messaging application built with the T3 Stack, featuring Twitch-styl
 ### Installation
 
 1. Clone the repository:
+
    ```bash
    git clone <repository-url>
    cd chat-app
    ```
 
 2. Install dependencies:
+
    ```bash
    npm install
    ```
 
 3. Set up the database:
+
    ```bash
    npm run db:push
    ```
 
 4. Start the development server:
+
    ```bash
    npm run dev
    ```
@@ -92,15 +96,18 @@ src/
 ## Key Components
 
 ### Message System
+
 - **Post**: Individual message display with timestamp, username, and content
 - **MessageList**: Scrollable container with auto-scroll and real-time updates
 - **ChatInput**: Message input with character counter and validation
 
 ### User Management
+
 - **UsernameEditor**: Click-to-edit username functionality
 - **Header**: App title and username display
 
 ### Utilities
+
 - **Username generation**: Random adjective + noun + number combinations
 - **Color management**: Predefined palette for username colors
 - **Input validation**: Username and message content validation
@@ -120,6 +127,7 @@ model Message {
 ## API Endpoints
 
 ### tRPC Routes
+
 - `message.getAll` - Fetch all messages in chronological order
 - `message.create` - Create a new message with validation
 
@@ -128,10 +136,11 @@ model Message {
 The app includes comprehensive testing:
 
 - **Unit Tests**: Username utilities and React components
-- **Component Tests**: Post component with various scenarios  
+- **Component Tests**: Post component with various scenarios
 - **E2E Tests**: Full user flows including message sending and username editing
 
 Run tests:
+
 ```bash
 npm run test        # Unit tests
 npm run test:e2e    # E2E tests
@@ -148,6 +157,7 @@ npm run test:e2e    # E2E tests
 4. Deploy automatically
 
 The app is optimized for Vercel with:
+
 - Automatic PostgreSQL database provisioning
 - Zero-config deployment
 - Environment variable management
@@ -155,6 +165,7 @@ The app is optimized for Vercel with:
 ### Environment Variables
 
 For production, set:
+
 ```env
 DATABASE_URL="your-postgresql-connection-string"
 ```
