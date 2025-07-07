@@ -24,7 +24,7 @@ A real-time messaging application built with the T3 Stack, featuring Twitch-styl
 - **[Tailwind CSS](https://tailwindcss.com)** - Styling
 - **[tRPC](https://trpc.io)** - End-to-end typesafe APIs
 - **[Prisma](https://prisma.io)** - Database ORM
-- **[SQLite](https://sqlite.org)** - Database (dev), PostgreSQL (production)
+- **[PostgreSQL](https://postgresql.org)** - Database
 - **[Tanstack Query](https://tanstack.com/query)** - Data fetching and caching
 - **[Vitest](https://vitest.dev)** - Unit testing
 - **[Playwright](https://playwright.dev)** - E2E testing
@@ -34,6 +34,7 @@ A real-time messaging application built with the T3 Stack, featuring Twitch-styl
 ### Prerequisites
 
 - Node.js 18+ and npm
+- PostgreSQL 14+
 - Git
 
 ### Installation
@@ -51,19 +52,40 @@ A real-time messaging application built with the T3 Stack, featuring Twitch-styl
    npm install
    ```
 
-3. Set up the database:
+3. Set up PostgreSQL:
+
+   ```bash
+   # Install PostgreSQL (macOS)
+   brew install postgresql@14
+   brew services start postgresql@14
+
+   # Create development database
+   createdb chat_app_dev
+   ```
+
+4. Configure environment:
+
+   ```bash
+   # Copy environment file
+   cp .env.example .env
+
+   # Update DATABASE_URL in .env with your username:
+   # DATABASE_URL="postgresql://your_username@localhost:5432/chat_app_dev"
+   ```
+
+5. Set up the database schema (creates Message table, generates Prisma client code):
 
    ```bash
    npm run db:push
    ```
 
-4. Start the development server:
+6. Start the development server:
 
    ```bash
    npm run dev
    ```
 
-5. Open [http://localhost:3000](http://localhost:3000) in your browser.
+7. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Available Scripts
 
