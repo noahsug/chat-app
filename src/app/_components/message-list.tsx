@@ -18,16 +18,10 @@ interface Message {
  * for simplicity and to work well with Vercel's serverless functions
  */
 export function MessageList() {
-  const query = api.message.getAll.useQuery(
-    undefined,
-    {
-      refetchInterval: 2000, // Poll every 2 seconds for real-time feel
-    }
-  );
-  
-  const messages: Message[] | undefined = query.data;
-  const isLoading: boolean = query.isLoading;
-  const error = query.error;
+  const query = api.message.getAll.useQuery(undefined, {
+    refetchInterval: 2000, // Poll every 2 seconds for real-time feel
+  });
+  const { data: messages, isLoading, error } = query;
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -42,8 +36,8 @@ export function MessageList() {
   if (isLoading) {
     return (
       <div className="flex-1 overflow-y-auto">
-        <div className="max-w-4xl mx-auto p-4">
-          <div className="text-gray-400 text-sm">Loading messages...</div>
+        <div className="mx-auto max-w-4xl p-4">
+          <div className="text-sm text-gray-400">Loading messages...</div>
         </div>
       </div>
     );
@@ -52,9 +46,9 @@ export function MessageList() {
   if (error) {
     return (
       <div className="flex-1 overflow-y-auto">
-        <div className="max-w-4xl mx-auto p-4">
-          <div className="text-red-400 text-sm">
-            Error loading messages: {error.message || "Unknown error"}
+        <div className="mx-auto max-w-4xl p-4">
+          <div className="text-sm text-red-400">
+            Error loading messages: {error.message}
           </div>
         </div>
       </div>
@@ -63,13 +57,13 @@ export function MessageList() {
 
   return (
     <div className="flex-1 overflow-y-auto">
-      <div className="max-w-4xl mx-auto">
-        {!messages || messages.length === 0 ? (
-          <div className="p-4 text-gray-400 text-sm">
+      <div className="mx-auto max-w-4xl">
+        {messages?.length === 0 ? (
+          <div className="p-4 text-sm text-gray-400">
             No messages yet. Be the first to say hello!
           </div>
         ) : (
-          messages.map((message: Message, index: number) => (
+          messages?.map((message: Message, index: number) => (
             <Post
               key={message.id}
               username={message.username}
