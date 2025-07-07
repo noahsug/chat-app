@@ -49,13 +49,14 @@ export function MessageList() {
             No messages yet. Be the first to say hello!
           </div>
         ) : (
-          messages?.map((message) => (
+          messages?.map((message, index) => (
             <Post
               key={message.id}
               username={message.username}
               content={message.content}
               timestamp={message.createdAt}
               color={message.color}
+              isAlternate={index % 2 === 1}
             />
           ))
         )}

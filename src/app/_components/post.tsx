@@ -3,9 +3,10 @@ interface PostProps {
   content: string;
   timestamp: Date;
   color: string;
+  isAlternate?: boolean;
 }
 
-export function Post({ username, content, timestamp, color }: PostProps) {
+export function Post({ username, content, timestamp, color, isAlternate = false }: PostProps) {
   const formatTime = (date: Date) => {
     return date.toLocaleTimeString("en-US", {
       hour12: false,
@@ -15,13 +16,13 @@ export function Post({ username, content, timestamp, color }: PostProps) {
   };
 
   return (
-    <div className="px-4 py-1 text-sm leading-relaxed">
+    <div className={`px-2 sm:px-4 py-1 text-sm leading-relaxed ${isAlternate ? 'bg-[#1E1E23]' : ''}`}>
       <span className="text-gray-400">[{formatTime(timestamp)}]</span>{" "}
-      <span style={{ color }} className="font-medium">
+      <span style={{ color }} className="font-medium break-words">
         {username}
       </span>
       <span className="text-gray-400">: </span>
-      <span className="text-gray-200">{content}</span>
+      <span className="text-gray-200 break-words">{content}</span>
     </div>
   );
 }

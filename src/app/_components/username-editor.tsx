@@ -50,14 +50,14 @@ export function UsernameEditor({ username, color, onUsernameChange }: UsernameEd
 
   if (isEditing) {
     return (
-      <div className="flex items-center gap-2">
+      <div className="flex flex-col gap-1 min-w-0">
         <input
           type="text"
           value={editValue}
           onChange={(e) => setEditValue(e.target.value)}
           onKeyDown={handleKeyDown}
           onBlur={handleSave}
-          className="bg-[#18181B] text-[#EFEFF1] px-2 py-1 rounded border border-gray-600 focus:outline-none focus:ring-1 focus:ring-[#9146FF]"
+          className="bg-[#18181B] text-[#EFEFF1] px-2 py-1 rounded border border-gray-600 focus:outline-none focus:ring-1 focus:ring-[#9146FF] min-w-0"
           maxLength={50}
           autoFocus
         />
@@ -71,7 +71,7 @@ export function UsernameEditor({ username, color, onUsernameChange }: UsernameEd
   return (
     <button
       onClick={handleEdit}
-      className="hover:bg-[#18181B] px-2 py-1 rounded transition-colors"
+      className="hover:bg-[#18181B] px-2 py-1 rounded transition-colors truncate max-w-32 sm:max-w-none"
       style={{ color }}
     >
       {username}

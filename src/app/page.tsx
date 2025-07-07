@@ -6,7 +6,7 @@ import { HydrateClient } from "@/trpc/server";
 export default async function Home() {
   return (
     <HydrateClient>
-      <main className="flex flex-col h-screen max-w-6xl mx-auto">
+      <main className="flex flex-col h-screen max-w-6xl mx-auto min-w-0">
         <Header />
         <MessageList />
         <ChatInput />
