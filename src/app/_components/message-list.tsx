@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import React from "react";
 import { Post } from "./post";
 import { api } from "@/trpc/react";
 
@@ -22,16 +22,6 @@ export function MessageList() {
     refetchInterval: 2000, // Poll every 2 seconds for real-time feel
   });
   const { data: messages, isLoading, error } = query;
-  const messagesEndRef = useRef<HTMLDivElement>(null);
-
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
-
-  // Auto-scroll to bottom when new messages arrive
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
 
   if (isLoading) {
     return (
@@ -74,7 +64,6 @@ export function MessageList() {
             />
           ))
         )}
-        <div ref={messagesEndRef} />
       </div>
     </div>
   );

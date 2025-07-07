@@ -13,7 +13,7 @@ A real-time messaging application built with the T3 Stack, featuring Twitch-styl
 - **Character counter** and input validation (max 500 characters)
 - **Random username generation** with fun adjective + noun + number combinations
 - **Color-coded usernames** from a predefined palette
-- **Auto-scroll** to bottom when new messages arrive
+- **Manual scroll** - users control their scroll position
 - **Loading states** and error handling
 
 ## Tech Stack
