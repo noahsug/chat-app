@@ -1,29 +1,180 @@
-# Create T3 App
+# Global Chat App
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+A real-time messaging application built with the T3 Stack, featuring Twitch-style chat UI and instant message updates.
 
-## What's next? How do I make an app with this?
+![Global Chat Demo](https://via.placeholder.com/800x400/18181B/EFEFF1?text=Global+Chat+App)
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+## Features
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+- **Real-time messaging** with 2-second polling updates
+- **Username system** with localStorage persistence and click-to-edit functionality
+- **Twitch-style UI** with alternating message backgrounds for better readability
+- **Responsive design** that works on mobile (320px+) and desktop (up to 800px)
+- **Character counter** and input validation (max 500 characters)
+- **Random username generation** with fun adjective + noun + number combinations
+- **Color-coded usernames** from a predefined palette
+- **Auto-scroll** to bottom when new messages arrive
+- **Loading states** and error handling
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+## Tech Stack
 
-## Learn More
+- **[Next.js 15](https://nextjs.org)** - React framework with App Router
+- **[React 19](https://reactjs.org)** - UI library
+- **[TypeScript](https://typescriptlang.org)** - Type safety
+- **[Tailwind CSS](https://tailwindcss.com)** - Styling
+- **[tRPC](https://trpc.io)** - End-to-end typesafe APIs
+- **[Prisma](https://prisma.io)** - Database ORM
+- **[SQLite](https://sqlite.org)** - Database (dev), PostgreSQL (production)
+- **[Tanstack Query](https://tanstack.com/query)** - Data fetching and caching
+- **[Vitest](https://vitest.dev)** - Unit testing
+- **[Playwright](https://playwright.dev)** - E2E testing
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+## Getting Started
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+### Prerequisites
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+- Node.js 18+ and npm
+- Git
 
-## How do I deploy this?
+### Installation
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   cd chat-app
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Set up the database:
+   ```bash
+   npm run db:push
+   ```
+
+4. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+5. Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## Available Scripts
+
+- `npm run dev` - Start development server with Turbopack
+- `npm run build` - Build for production
+- `npm run start` - Start production server
+- `npm run lint` - Run ESLint
+- `npm run typecheck` - Run TypeScript checks
+- `npm run test` - Run unit tests with Vitest
+- `npm run test:e2e` - Run E2E tests with Playwright
+- `npm run db:push` - Push database schema changes
+- `npm run db:studio` - Open Prisma Studio
+
+## Project Structure
+
+```
+src/
+├── app/
+│   ├── _components/     # React components
+│   ├── api/trpc/        # tRPC API routes
+│   ├── layout.tsx       # Root layout
+│   └── page.tsx         # Home page
+├── server/
+│   └── api/             # tRPC server setup and routers
+├── utils/               # Utility functions
+├── test/                # Test setup files
+└── styles/              # Global styles
+```
+
+## Key Components
+
+### Message System
+- **Post**: Individual message display with timestamp, username, and content
+- **MessageList**: Scrollable container with auto-scroll and real-time updates
+- **ChatInput**: Message input with character counter and validation
+
+### User Management
+- **UsernameEditor**: Click-to-edit username functionality
+- **Header**: App title and username display
+
+### Utilities
+- **Username generation**: Random adjective + noun + number combinations
+- **Color management**: Predefined palette for username colors
+- **Input validation**: Username and message content validation
+
+## Database Schema
+
+```prisma
+model Message {
+  id        Int      @id @default(autoincrement())
+  content   String
+  username  String
+  color     String
+  createdAt DateTime @default(now())
+}
+```
+
+## API Endpoints
+
+### tRPC Routes
+- `message.getAll` - Fetch all messages in chronological order
+- `message.create` - Create a new message with validation
+
+## Testing
+
+The app includes comprehensive testing:
+
+- **Unit Tests**: Username utilities and React components
+- **Component Tests**: Post component with various scenarios  
+- **E2E Tests**: Full user flows including message sending and username editing
+
+Run tests:
+```bash
+npm run test        # Unit tests
+npm run test:e2e    # E2E tests
+```
+
+## Deployment
+
+### Vercel (Recommended)
+
+1. Push your code to GitHub
+2. Import the project in [Vercel](https://vercel.com)
+3. Set up environment variables:
+   - `DATABASE_URL` - PostgreSQL connection string
+4. Deploy automatically
+
+The app is optimized for Vercel with:
+- Automatic PostgreSQL database provisioning
+- Zero-config deployment
+- Environment variable management
+
+### Environment Variables
+
+For production, set:
+```env
+DATABASE_URL="your-postgresql-connection-string"
+```
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature-name`
+3. Make your changes
+4. Run tests: `npm run test`
+5. Commit changes: `git commit -m "Description"`
+6. Push to branch: `git push origin feature-name`
+7. Open a Pull Request
+
+## License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+## Acknowledgments
+
+- Built with [Create T3 App](https://create.t3.gg/)
+- Inspired by Twitch chat interface
+- Uses T3 Stack best practices and conventions
