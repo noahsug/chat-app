@@ -28,9 +28,11 @@ export function UsernameEditor({ username, color }: UsernameEditorProps) {
 
   const handleSave = () => {
     const trimmedValue = editValue.trim();
-    
+
     if (!validateUsername(trimmedValue)) {
-      setError("Username must be 3-50 characters, alphanumeric and spaces only");
+      setError(
+        "Username must be 3-50 characters, alphanumeric and spaces only",
+      );
       return;
     }
 
@@ -55,19 +57,19 @@ export function UsernameEditor({ username, color }: UsernameEditorProps) {
 
   if (isEditing) {
     return (
-      <div className="flex flex-col gap-2 min-w-0 animate-bounce-in">
+      <div className="animate-bounce-in flex min-w-0 flex-col gap-2">
         <input
           type="text"
           value={editValue}
           onChange={(e) => setEditValue(e.target.value)}
           onKeyDown={handleKeyDown}
           onBlur={handleSave}
-          className="bg-white/90 text-slate-800 px-4 py-2 rounded-2xl border-3 border-yellow-300 focus:outline-none focus:ring-3 focus:ring-pink-300 focus:border-pink-400 min-w-0 font-bold shadow-lg hover-grow"
+          className="hover-grow min-w-0 rounded-2xl border-3 border-yellow-300 bg-white/90 px-4 py-2 font-bold text-slate-800 shadow-lg focus:border-pink-400 focus:ring-3 focus:ring-pink-300 focus:outline-none"
           maxLength={50}
           autoFocus
         />
         {error && (
-          <span className="bg-red-200 text-red-800 text-xs px-3 py-1 rounded-full border-2 border-red-400 animate-wiggle">
+          <span className="animate-wiggle rounded-full border-2 border-red-400 bg-red-200 px-3 py-1 text-xs text-red-800">
             🚨 {error}
           </span>
         )}
@@ -78,7 +80,7 @@ export function UsernameEditor({ username, color }: UsernameEditorProps) {
   return (
     <button
       onClick={handleEdit}
-      className="bg-white/20 hover:bg-white/40 px-4 py-2 rounded-2xl transition-all duration-300 truncate max-w-32 sm:max-w-none font-bold text-lg backdrop-blur-sm hover:scale-110 shadow-lg hover:shadow-xl border-2 border-white/30 hover-bounce"
+      className="max-w-32 truncate rounded-2xl border-2 border-white/30 bg-white/20 px-4 py-2 text-lg font-bold shadow-lg backdrop-blur-sm transition-all duration-300 hover:scale-110 hover:bg-white/40 hover:shadow-xl sm:max-w-none"
       style={{ color }}
     >
       <span className="flex items-center gap-1">
