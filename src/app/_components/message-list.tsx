@@ -59,9 +59,13 @@ export function MessageList() {
 
   if (isLoading) {
     return (
-      <div className="flex-1 overflow-y-auto">
-        <div className="mx-auto max-w-4xl p-4">
-          <div className="text-sm text-gray-400">Loading messages...</div>
+      <div className="flex-1 overflow-y-auto glass">
+        <div className="mx-auto max-w-4xl p-6">
+          <div className="glass p-6 rounded-3xl text-center animate-bounce-in">
+            <div className="text-2xl animate-rainbow mb-2">🌟✨🌟</div>
+            <div className="text-lg font-bold text-purple-800">Loading magical messages...</div>
+            <div className="text-sm text-purple-600 mt-2 animate-float">Please wait while we sprinkle some fun! 🎨</div>
+          </div>
         </div>
       </div>
     );
@@ -69,10 +73,13 @@ export function MessageList() {
 
   if (error) {
     return (
-      <div className="flex-1 overflow-y-auto">
-        <div className="mx-auto max-w-4xl p-4">
-          <div className="text-sm text-red-400">
-            Error loading messages: {error.message}
+      <div className="flex-1 overflow-y-auto glass">
+        <div className="mx-auto max-w-4xl p-6">
+          <div className="bg-red-200 border-4 border-red-400 p-6 rounded-3xl text-center animate-wiggle">
+            <div className="text-3xl mb-2">🚨🔥🚨</div>
+            <div className="text-lg font-bold text-red-800">Oops! Something went wrong!</div>
+            <div className="text-sm text-red-600 mt-2">{error.message}</div>
+            <div className="text-xs text-red-500 mt-2 animate-bounce">Don't worry, we're fixing it! 🔧✨</div>
           </div>
         </div>
       </div>
@@ -80,11 +87,16 @@ export function MessageList() {
   }
 
   return (
-    <div className="flex-1 overflow-y-auto" ref={containerRef}>
-      <div className="mx-auto max-w-4xl">
+    <div className="flex-1 overflow-y-auto glass" ref={containerRef}>
+      <div className="mx-auto max-w-4xl p-4">
         {messages?.length === 0 ? (
-          <div className="p-4 text-sm text-gray-400">
-            No messages yet. Be the first to say hello!
+          <div className="text-center py-12 animate-bounce-in">
+            <div className="glass p-8 rounded-3xl inline-block hover-grow">
+              <div className="text-6xl mb-4 animate-float">🎉🌈🎉</div>
+              <div className="text-2xl font-bold text-purple-800 mb-2">No messages yet!</div>
+              <div className="text-lg text-purple-600 animate-wiggle">Be the first to spread some joy! ✨</div>
+              <div className="text-sm text-purple-500 mt-2">Type something fun below! 👇</div>
+            </div>
           </div>
         ) : (
           messages?.map((message: Message, index: number) => (

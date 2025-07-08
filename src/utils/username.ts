@@ -1,19 +1,23 @@
-// Predefined lists for random username generation
+// Super fun and colorful username generation lists!
 const adjectives = [
-  "Happy", "Cool", "Bright", "Swift", "Clever", "Brave", "Calm", "Wise",
-  "Quick", "Bold", "Smart", "Kind", "Jolly", "Witty", "Fancy", "Noble",
-  "Sunny", "Merry", "Lucky", "Eager", "Lively", "Peppy", "Zesty", "Funky"
+  "Magical", "Sparkly", "Rainbow", "Bubbly", "Giggly", "Bouncy", "Dreamy", "Silly",
+  "Whimsical", "Fuzzy", "Cheerful", "Glittery", "Playful", "Twinkly", "Jolly", "Peppy",
+  "Sunny", "Merry", "Lucky", "Zany", "Quirky", "Frisky", "Snazzy", "Jazzy", "Dazzling",
+  "Vibrant", "Radiant", "Brilliant", "Fantastic", "Wonderful", "Amazing", "Awesome", "Epic"
 ];
 
 const nouns = [
-  "Panda", "Tiger", "Eagle", "Dolphin", "Wolf", "Fox", "Bear", "Lion",
-  "Hawk", "Owl", "Deer", "Cat", "Dog", "Horse", "Rabbit", "Turtle",
-  "Penguin", "Koala", "Shark", "Whale", "Monkey", "Zebra", "Elephant", "Giraffe"
+  "Unicorn", "Dragon", "Butterfly", "Rainbow", "Cupcake", "Balloon", "Starfish", "Jellybean",
+  "Marshmallow", "Bubble", "Firefly", "Ladybug", "Honeybee", "Dragonfly", "Snowflake", "Flower",
+  "Moonbeam", "Stardust", "Sunshine", "CloudHopper", "Dewdrop", "Pebble", "Feather", "Crystal",
+  "Phoenix", "Comet", "Galaxy", "Prism", "Sparkle", "Twinkle", "Shimmer", "Glimmer", "Wizard"
 ];
 
-// Color palette for username display - matches design system
+// Super bright and vibrant color palette!
 const colors = [
-  "#FF6B6B", "#4ECDC4", "#45B7D1", "#96CEB4", "#FFEAA7", "#DDA0DD", "#98D8C8", "#F7DC6F"
+  "#FF1493", "#00CED1", "#FF4500", "#32CD32", "#FF69B4", "#1E90FF", "#FFD700", "#FF6347",
+  "#9370DB", "#00FA9A", "#FF8C00", "#4169E1", "#DC143C", "#00BFFF", "#ADFF2F", "#FF1493",
+  "#FF6B35", "#F7931E", "#FFE66D", "#A8E6CF", "#FFAAA5", "#FF8B94", "#A8DADC", "#457B9D"
 ];
 
 /**

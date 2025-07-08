@@ -7,8 +7,8 @@ import { TRPCReactProvider } from "@/trpc/react";
 import { UserProvider } from "@/contexts/user-context";
 
 export const metadata: Metadata = {
-  title: "Global Chat",
-  description: "A real-time global messaging app",
+  title: "🌈 FunChat ✨",
+  description: "A super bright and fun real-time messaging app that brings joy to conversations!",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
@@ -22,7 +22,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${geistFont.variable}`}>
-      <body className="min-h-screen bg-[#18181B] text-[#EFEFF1]">
+      <body className="min-h-screen text-slate-800">
         <TRPCReactProvider>
           <UserProvider>
             {children}
