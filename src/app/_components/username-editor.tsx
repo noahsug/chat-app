@@ -64,7 +64,8 @@ export function UsernameEditor({ username, color }: UsernameEditorProps) {
           onChange={(e) => setEditValue(e.target.value)}
           onKeyDown={handleKeyDown}
           onBlur={handleSave}
-          className="hover-grow min-w-0 rounded-2xl border-3 border-yellow-300 bg-white/90 px-4 py-2 font-bold text-slate-800 shadow-lg focus:border-pink-400 focus:ring-3 focus:ring-pink-300 focus:outline-none"
+          placeholder="Enter your magical username..."
+          className="hover-grow min-w-0 rounded-2xl border-3 border-yellow-300 bg-white/90 px-4 py-2 font-bold text-slate-800 placeholder-purple-500 focus:placeholder-purple-300 shadow-lg focus:border-pink-400 focus:ring-3 focus:ring-pink-300 focus:outline-none"
           maxLength={50}
           autoFocus
         />

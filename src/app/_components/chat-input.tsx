@@ -47,7 +47,7 @@ export function ChatInput() {
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 placeholder="✨ Share your magical thoughts... Type something fun! 🌈"
-                className="w-full bg-white/90 text-slate-800 placeholder-purple-500 px-6 py-4 rounded-2xl border-4 border-pink-300 focus:outline-none focus:ring-4 focus:ring-yellow-300 focus:border-pink-400 shadow-lg transition-all duration-300 font-medium text-lg hover-grow"
+                className="w-full bg-white/90 text-slate-800 placeholder-purple-500 focus:placeholder-purple-300 px-6 py-4 rounded-2xl border-4 border-pink-300 focus:outline-none focus:ring-4 focus:ring-yellow-300 focus:border-pink-400 shadow-lg transition-all duration-300 font-medium text-lg hover-grow"
                 maxLength={500}
               />
               <div className="absolute right-4 top-1/2 transform -translate-y-1/2 text-2xl animate-float">
