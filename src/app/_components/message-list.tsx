@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { Post } from "./post";
 import { api } from "@/trpc/react";
 
@@ -29,29 +29,44 @@ export function MessageList() {
   const containerRef = useRef<HTMLDivElement>(null);
   const prevMessageCountRef = useRef<number>(0);
   const hasInitiallyScrolledRef = useRef<boolean>(false);
+  const wasAtBottomRef = useRef<boolean>(true); // Track if user was at bottom before new messages
 
-  const isAtBottom = () => {
+  const isAtBottom = useCallback(() => {
     if (!containerRef.current) return false;
     const { scrollTop, scrollHeight, clientHeight } = containerRef.current;
     // Consider "at bottom" if within 100px of the bottom
     return scrollHeight - scrollTop - clientHeight < 100;
-  };
+  }, []);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
+  // Track scroll position to determine if user was at bottom before new messages
+  useEffect(() => {
+    const handleScroll = () => {
+      wasAtBottomRef.current = isAtBottom();
+    };
+
+    const container = containerRef.current;
+    if (container) {
+      container.addEventListener('scroll', handleScroll, { passive: true });
+      return () => container.removeEventListener('scroll', handleScroll);
+    }
+  }, [isAtBottom]);
+
   // Smart auto-scroll: scroll on initial load, then only when user is at bottom AND there's a new message
   useEffect(() => {
     const currentMessageCount = messages?.length ?? 0;
-    const wasAtBottom = isAtBottom();
     const hasNewMessage = currentMessageCount > prevMessageCountRef.current;
     const isInitialLoad = !hasInitiallyScrolledRef.current && currentMessageCount > 0;
 
-    // Scroll on initial page load or when user is at bottom and new message arrives
-    if (isInitialLoad || (hasNewMessage && wasAtBottom)) {
+    // Scroll on initial page load or when user was at bottom and new message arrives
+    if (isInitialLoad || (hasNewMessage && wasAtBottomRef.current)) {
       scrollToBottom();
       hasInitiallyScrolledRef.current = true;
+      // After scrolling, user is now at bottom
+      wasAtBottomRef.current = true;
     }
 
     prevMessageCountRef.current = currentMessageCount;

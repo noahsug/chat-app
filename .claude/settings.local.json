@@ -11,7 +11,12 @@
       "mcp__context7__get-library-docs",
       "Bash(vercel env:*)",
       "Bash(rg:*)",
-      "Bash(npm run test:*)"
+      "Bash(npm run test:*)",
+      "Bash(npm test:*)",
+      "Bash(lsof:*)",
+      "Bash(node:*)",
+      "Bash(rm:*)",
+      "Bash(curl:*)"
     ],
     "deny": []
   }
