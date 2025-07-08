@@ -48,7 +48,6 @@ const mockMessages = [
 
 describe("MessageList Scroll Behavior", () => {
   let mockScrollIntoView: jest.Mock;
-  let mockContainer: HTMLElement;
 
   beforeEach(() => {
     // Mock scrollIntoView

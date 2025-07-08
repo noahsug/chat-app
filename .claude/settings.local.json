@@ -16,7 +16,8 @@
       "Bash(lsof:*)",
       "Bash(node:*)",
       "Bash(rm:*)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Bash(npm run build:*)"
     ],
     "deny": []
   }

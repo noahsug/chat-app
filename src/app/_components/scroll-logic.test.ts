@@ -186,7 +186,6 @@ describe("MessageList Scroll Logic", () => {
     });
 
     it("should handle message burst at bottom", () => {
-      const hasInitiallyScrolled = true;
       let currentCount = 10;
       let prevCount = 10;
       const wasAtBottom = true;

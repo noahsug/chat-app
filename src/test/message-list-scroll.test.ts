@@ -3,16 +3,14 @@
  * Tests the smart auto-scroll logic without mocking React hooks
  */
 
-import { MessageList } from "@/app/_components/message-list";
-
-// Mock message data for testing
-const createMockMessage = (id: number, username: string, content: string) => ({
-  id,
-  username,
-  content,
-  createdAt: new Date(`2023-01-01T10:${id.toString().padStart(2, '0')}:00Z`),
-  color: `#${Math.floor(Math.random()*16777215).toString(16)}`,
-});
+// Mock message data for testing (unused but kept for future tests)
+// const createMockMessage = (id: number, username: string, content: string) => ({
+//   id,
+//   username,
+//   content,
+//   createdAt: new Date(`2023-01-01T10:${id.toString().padStart(2, '0')}:00Z`),
+//   color: `#${Math.floor(Math.random()*16777215).toString(16)}`,
+// });
 
 describe("MessageList Scroll Behavior - Logic Tests", () => {
   describe("isAtBottom logic", () => {
@@ -101,8 +99,8 @@ describe("MessageList Scroll Behavior - Logic Tests", () => {
     });
 
     it("should handle message count going backwards (edge case)", () => {
-      let prevCount = 5;
-      let currentCount = 3; // Messages decreased (unlikely but possible)
+      const prevCount = 5;
+      const currentCount = 3; // Messages decreased (unlikely but possible)
 
       expect(currentCount > prevCount).toBe(false);
     });
@@ -230,10 +228,9 @@ describe("MessageList Scroll Behavior - Logic Tests", () => {
     });
 
     it("should handle rapid message bursts", () => {
-      let hasInitiallyScrolled = true;
       let messageCount = 10;
       let prevMessageCount = 10;
-      let wasAtBottom = true;
+      const wasAtBottom = true;
 
       // 3 messages arrive quickly
       for (let i = 1; i <= 3; i++) {

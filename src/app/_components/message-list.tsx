@@ -94,7 +94,7 @@ export function MessageList() {
             <div className="text-3xl mb-2">🚨🔥🚨</div>
             <div className="text-lg font-bold text-red-800">Oops! Something went wrong!</div>
             <div className="text-sm text-red-600 mt-2">{error.message}</div>
-            <div className="text-xs text-red-500 mt-2 animate-bounce">Don't worry, we're fixing it! 🔧✨</div>
+            <div className="text-xs text-red-500 mt-2 animate-bounce">Don&apos;t worry, we&apos;re fixing it! 🔧✨</div>
           </div>
         </div>
       </div>
